@@ -1,48 +1,45 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "./authcontext";
-import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
-import { toast } from "react-hot-toast";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import {useAuth} from './authcontext'
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [error, setError] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const bgColor = isAdmin ? "bg-red-500" : "bg-green-500";
-
-  const handleToggle = () => {
-    setIsAdmin(!isAdmin);
-  };
+  const bgColor = isAdmin ? 'bg-green-500' : 'bg-red-500';
+  const hoverColor = isAdmin ? 'hover:bg-green-600' : 'hover:bg-red-600';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
     try {
-      const endpoint = isAdmin
-        ? "http://localhost:3000/api/candidate/login"
-        : "http://localhost:3000/api/admin/login";
+      const endpoint = isAdmin ? '/api/admin/login' : '/api/candidate/login';
       const response = await axios.post(endpoint, { email, password });
 
       if (response.data.success) {
         login(response.data.data, response.data.token);
-        toast.success(
-          `Welcome back, ${
-            isAdmin ? "Admin" : "Candidate"
-          }! Redirecting to your dashboard...`
-        );
-        navigate(isAdmin ? "/admin/dashboard" : "/candidate/dashboard");
+        navigate(isAdmin ? '/admin/dashboard' : '/candidate/dashboard');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.message || "An error occurred";
-      setError(errorMessage);
-      toast.error(errorMessage);
+      setError(err.response?.data?.message || 'An error occurred');
+    }
+  };
+
+  const toggleRole = () => {
+    setIsAdmin((prev) => !prev);
+    // Navigate to the respective login page
+    if (isAdmin) {
+      navigate('/candidate/login');
+    } else {
+      navigate('/admin/login');
     }
   };
 
@@ -50,21 +47,21 @@ export default function LoginForm() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Log in</h2>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Log in as {isAdmin ? 'Admin' : 'Candidate'}
+          </h2>
           <p className="mt-2 text-sm text-gray-600">
             Enter your credentials to access your account
           </p>
         </div>
 
         <div className="flex items-center justify-between">
-          <div
-            className={`inline-flex items-center px-4 py-2 rounded-full ${bgColor} text-white`}
+          <button
+            onClick={toggleRole}
+            className={`inline-flex items-center px-4 py-2 rounded-full ${bgColor} ${hoverColor} text-white`}
           >
-            <button onClick={handleToggle} className="flex items-center">
-              <span className="mr-2">{isAdmin ? "Candidate" : "Admin"}</span>
-              <FaUser className="w-4 h-4" />
-            </button>
-          </div>
+            Switch to {isAdmin ? 'Candidate' : 'Admin'}
+          </button>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -88,7 +85,7 @@ export default function LoginForm() {
                 <FaLock className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

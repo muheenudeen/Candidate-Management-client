@@ -1,11 +1,10 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/authcontext';
 import LoginForm from './contexts/login';
+import ProtectedRoute from './contexts/protectedRoute';
 // import AdminDashboard from './pages/AdminDashboard';
 // import CandidateDashboard from './pages/CandidateDashboard';
-
-import ProtectedRoute from './contexts/protectedRoute';
-
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* <AdminDashboard /> */}
+                <div>Admin Dashboard</div>
               </ProtectedRoute>
             }
           />
@@ -27,6 +27,7 @@ function App() {
             element={
               <ProtectedRoute>
                 {/* <CandidateDashboard /> */}
+                <div>Candidate Dashboard</div>
               </ProtectedRoute>
             }
           />
@@ -38,4 +39,3 @@ function App() {
 }
 
 export default App;
-
