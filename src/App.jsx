@@ -1,40 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './contexts/authcontext';
-import LoginForm from './contexts/login';
-import ProtectedRoute from './contexts/protectedRoute';
-// import AdminDashboard from './pages/AdminDashboard';
-// import CandidateDashboard from './pages/CandidateDashboard';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import LoginForm from './component/pages/LoginForm';
+import AdminDashboard from './component/components/adminDashboard';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/admin/login" element={<LoginForm type="admin" />} />
-          <Route path="/candidate/login" element={<LoginForm type="candidate" />} />
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                {/* <AdminDashboard /> */}
-                <div>Admin Dashboard</div>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/candidate/dashboard"
-            element={
-              <ProtectedRoute>
-                {/* <CandidateDashboard /> */}
-                <div>Candidate Dashboard</div>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/" element={<Navigate to="/candidate/login" />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/admin/login" element={<LoginForm />} />
+        <Route path="/candidate/login" element={<LoginForm />} />
+        {/* <Route
+          path="/admin/dashboard"
+          element={isAdminAuthenticated() ? <AdminDashboard /> : <Navigate to="/admin/dashboard" />}
+        /> */}
+        <Route
+          path="/admin/dashboard"
+          element={ <AdminDashboard/>}
+        />
+      </Routes>
+    </Router>
   );
 }
 
