@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AddCandidateModal from "../modal/addCandidatesModal";
 
 const AdminDashboard = () => {
   const [candidates, setCandidates] = useState([]);
@@ -8,6 +9,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);  // State to handle modal visibility
   const navigate = useNavigate();
   const limit = 5;
 
@@ -59,15 +61,32 @@ const AdminDashboard = () => {
     }
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);  // Open the modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);  // Close the modal
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <h1 className="text-2xl font-bold text-gray-700 mb-4">Admin Dashboard</h1>
       <button
-        onClick={() => navigate("/admin/add-candidate")}
+        onClick={openModal}  // Open the modal when the button is clicked
         className="mb-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
       >
         Add New Candidate
       </button>
+
+      {/* Modal component */}
+      {isModalOpen && (
+        <AddCandidateModal 
+          isOpen={isModalOpen} 
+          onClose={closeModal} 
+        />
+      )}
+
       {loading ? (
         <p>Loading candidates...</p>
       ) : error ? (
