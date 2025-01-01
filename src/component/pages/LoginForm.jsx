@@ -12,7 +12,7 @@ export default function LoginForm() {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  const bgColor = isAdmin ? 'bg-green-500' : 'bg-red-500';
+  const bgColor = isAdmin ? 'bg-[#39FF14]' : 'bg-[#FF2400]';
   const hoverColor = isAdmin ? 'hover:bg-green-600' : 'hover:bg-red-600';
 
   const handleSubmit = async (e) => {
@@ -110,7 +110,7 @@ export default function LoginForm() {
 
           <button
             type="submit"
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${bgColor} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#FF2400] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
           >
             Log in
           </button>
