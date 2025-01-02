@@ -18,7 +18,6 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
     try {
       const endpoint = isAdmin
         ? '/admin/login'
