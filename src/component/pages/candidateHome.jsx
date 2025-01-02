@@ -97,7 +97,6 @@ export default function CandidateHome() {
       <div className="max-w-6xl mx-auto">
         <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg shadow-2xl rounded-3xl overflow-hidden">
           <div className="p-8">
-            {/* Header with AR Robotics logo */}
             <div className="flex justify-between items-center mb-8">
               <img
                 src="https://images.jdmagicbox.com/v2/comp/bhubaneshwar/v6/0674px674.x674.220603004828.p2v6/catalogue/a-r-robotics-bhubaneswar-bhubaneshwar-research-centres-aj5j7yyhzm.jpg"
@@ -108,7 +107,6 @@ export default function CandidateHome() {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-12">
-              {/* Profile Section */}
               <div className="lg:w-1/3">
                 <div className="relative">
                   <img
@@ -145,9 +143,8 @@ export default function CandidateHome() {
                 )}
               </div>
 
-              {/* Info Section */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-6 text-gray-800 ml-20">{"Hi " }{candidateData.name}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800 ml-20">{"Hi "}{candidateData.name}</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center space-x-4">
@@ -218,7 +215,6 @@ export default function CandidateHome() {
               </div>
             </div>
 
-            {/* Stats Section */}
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-gradient-to-br from-pink-400 to-red-500 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition duration-200">
                 <div className="text-6xl font-bold mb-2">{candidateData.totalApplications}</div>
@@ -249,14 +245,7 @@ export default function CandidateHome() {
           </div>
         </div>
       </div>
-
-      {/* {showPdfModal && (
-        <Modal onClose={() => setShowPdfModal(false)}>
-          <PDFViewer pdfUrl={candidateData.resumeUrl} />
-        </Modal>
-      )} */}
-
-      {/* Profile Completion Tips Modal */}
+      
       {showProfileModal && (
         <Modal onClose={() => setShowProfileModal(false)}>
           <div className="p-6">
