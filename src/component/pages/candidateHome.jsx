@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../modal/contentModal';
-import PDFViewer from '../components/pdfViewer';
 import api from '../../axios/axios';
 
 
@@ -233,7 +232,7 @@ export default function CandidateHome() {
                 <div className="text-2xl font-semibold mb-1">05 Jan 2025</div>
               </div>
               <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition duration-200">
-                <div className="text-6xl font-bold mb-2">{candidateData.profileComplete}%</div>
+                <div className="text-6xl font-bold mb-2">{candidateData.profileComplete}92%</div>
                 <div className="text-2xl font-semibold mb-1">Profile</div>
                 <div className="text-yellow-200">Complete</div>
               </div>
@@ -251,11 +250,11 @@ export default function CandidateHome() {
         </div>
       </div>
 
-      {showPdfModal && (
+      {/* {showPdfModal && (
         <Modal onClose={() => setShowPdfModal(false)}>
           <PDFViewer pdfUrl={candidateData.resumeUrl} />
         </Modal>
-      )}
+      )} */}
 
       {/* Profile Completion Tips Modal */}
       {showProfileModal && (
