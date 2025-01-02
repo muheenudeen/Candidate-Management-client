@@ -30,7 +30,6 @@ export default function LoginForm() {
         const id = data._id;
         localStorage.setItem('token', token);
         localStorage.setItem('id', id);
-
         toast.success(`Welcome ${data.name}!`);
         navigate(isAdmin ? '/admin/dashboard' : '/candidate/home');
       }
@@ -40,7 +39,6 @@ export default function LoginForm() {
       toast.error(errorMsg);
     }
   };
-
   const toggleRole = () => {
     setIsAdmin(!isAdmin);
   };
@@ -117,3 +115,5 @@ export default function LoginForm() {
     </div>
   );
 }
+
+
