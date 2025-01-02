@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../axios/axios";
 
 const AddCandidateModal = ({ onClose }) => {
   const [name, setName] = useState("");
@@ -25,7 +25,7 @@ const AddCandidateModal = ({ onClose }) => {
         password
       };
 
-      const response = await axios.post("http://localhost:3000/api/admin/candidate", candidateData, {
+      const response = await api.post("/admin/candidate", candidateData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

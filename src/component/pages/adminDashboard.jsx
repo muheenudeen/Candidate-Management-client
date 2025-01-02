@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AddCandidateModal from "../modal/addCandidatesModal";
+import api from "../../axios/axios";
 
 const UserManagement = () => {
   const [candidates, setCandidates] = useState([]);
@@ -11,15 +11,15 @@ const UserManagement = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const limit = 7;
+  const limit = 5;
 
   const fetchCandidates = async (page) => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Unauthorized: No token found.");
-      const response = await axios.get(
-        `http://localhost:3000/api/admin/candidate?page=${page}&limit=${limit}`,
+      const response = await api.get(
+        `/admin/candidate?page=${page}&limit=${limit}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -43,7 +43,7 @@ const UserManagement = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Unauthorized: No token found.");
-      await axios.delete(`http://localhost:3000/api/admin/candidate/${id}`, {
+      await api.delete(`/admin/candidate/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCandidates(currentPage);

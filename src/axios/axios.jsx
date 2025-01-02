@@ -1,10 +1,10 @@
 
-// import axios from "axios";
+import axios from "axios";
 
-// const baseUrl = import.meta.env.VITE_SERVER_URL;
-// const api = axios.create({
-//   baseURL: baseUrl,
-// });
+const baseUrl = import.meta.env.VITE_SERVER_URL;
+const api = axios.create({
+  baseURL: baseUrl,
+});
 
 // api.interceptors.request.use(
 //   (request) => {
@@ -24,4 +24,4 @@
 //   (error) => Promise.reject(error)
 // );
 
-// export default api;
+export default api;

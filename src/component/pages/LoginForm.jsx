@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import api from '../../axios/axios';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -21,9 +21,9 @@ export default function LoginForm() {
 
     try {
       const endpoint = isAdmin
-        ? 'http://localhost:3000/api/admin/login'
-        : 'http://localhost:3000/api/candidate/login';
-      const response = await axios.post(endpoint, { email, password });
+        ? '/admin/login'
+        : '/candidate/login';
+      const response = await api.post(endpoint, { email, password });
 
       const { token, data } = response.data;
 
