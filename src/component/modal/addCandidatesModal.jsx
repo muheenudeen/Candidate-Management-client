@@ -12,7 +12,7 @@ const AddCandidateModal = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    alert('Candidate added successfully');
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Unauthorized: No token found.");

@@ -3,6 +3,7 @@ import React from 'react';
 const PDFViewer = ({ pdfUrl }) => {
   return (
     <div className="w-full h-screen max-h-[80vh]">
+      {console.log(pdfUrl)}
       <iframe
         src={`${pdfUrl}#toolbar=0`}
         width="100%"

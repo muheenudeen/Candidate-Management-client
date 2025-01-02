@@ -105,7 +105,7 @@ export default function CandidateHome() {
                 alt="AR Robotics Logo"
                 className="h-16 w-auto"
               />
-              <h1 className="text-4xl font-bold text-gray-800">Welcome to AR Robotics</h1>
+              <h1 className="text-4xl font-bold text-blue-900 mr-80">Welcome to AR Robotics</h1>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-12">
@@ -148,7 +148,7 @@ export default function CandidateHome() {
 
               {/* Info Section */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">{candidateData.name}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800 ml-20">{"Hi " }{candidateData.name}</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center space-x-4">
@@ -230,6 +230,7 @@ export default function CandidateHome() {
                 <div className="text-6xl font-bold mb-2">{candidateData.interviewsScheduled}</div>
                 <div className="text-2xl font-semibold mb-1">Interviews</div>
                 <div className="text-purple-200">Scheduled</div>
+                <div className="text-2xl font-semibold mb-1">05 Jan 2025</div>
               </div>
               <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-6 text-white shadow-lg transform hover:scale-105 transition duration-200">
                 <div className="text-6xl font-bold mb-2">{candidateData.profileComplete}%</div>
@@ -238,7 +239,6 @@ export default function CandidateHome() {
               </div>
             </div>
 
-            {/* New functionality: Profile Completion Tips */}
             <div className="mt-12">
               <button
                 onClick={() => setShowProfileModal(true)}
@@ -251,7 +251,6 @@ export default function CandidateHome() {
         </div>
       </div>
 
-      {/* PDF Viewer Modal */}
       {showPdfModal && (
         <Modal onClose={() => setShowPdfModal(false)}>
           <PDFViewer pdfUrl={candidateData.resumeUrl} />

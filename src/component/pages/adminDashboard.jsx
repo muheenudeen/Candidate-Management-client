@@ -44,9 +44,12 @@ const UserManagement = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Unauthorized: No token found.");
       await api.delete(`/admin/candidate/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` 
+      },
+        
       });
       fetchCandidates(currentPage);
+      alert('Delete successful');
     } catch (error) {
       console.error("Error deleting candidate:", error);
       setError("Failed to delete candidate. Please try again.");
@@ -80,7 +83,7 @@ const UserManagement = () => {
           onClose={() => setIsModalOpen(false)}
           onSuccess={() => {
             fetchCandidates(currentPage);
-            setIsModalOpen(false);
+            setIsModalOpen(false)
           }}
         />
       )}
@@ -166,7 +169,7 @@ const UserManagement = () => {
                           </svg>
                           Edit
                         </button>
-                        <button
+                        <button 
                           onClick={() => deleteCandidate(candidate._id)}
                           className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-[#EF4444] hover:bg-[#DC2626] focus:outline-none"
                         >
