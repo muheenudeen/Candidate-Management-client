@@ -44,12 +44,10 @@ const UserManagement = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Unauthorized: No token found.");
       await api.delete(`/admin/candidate/${id}`, {
-        headers: { Authorization: `Bearer ${token}` 
-      },
-        
+        headers: { Authorization: `Bearer ${token}` },
       });
       fetchCandidates(currentPage);
-      alert('Delete successful');
+      alert("Candidate deleted successfully.");
     } catch (error) {
       console.error("Error deleting candidate:", error);
       setError("Failed to delete candidate. Please try again.");
@@ -62,28 +60,45 @@ const UserManagement = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/admin/login");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">User Management</h1>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors flex items-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          Add New Candidate
-        </button>
+        <div className="flex gap-4">
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition-colors"
+          >
+            Logout
+          </button>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Add New Candidate
+          </button>
+        </div>
       </div>
 
       {isModalOpen && (
-        <AddCandidateModal 
-          isOpen={isModalOpen} 
+        <AddCandidateModal
+          isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSuccess={() => {
             fetchCandidates(currentPage);
-            setIsModalOpen(false)
+            setIsModalOpen(false);
           }}
         />
       )}
@@ -104,7 +119,7 @@ const UserManagement = () => {
                     No
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Profile Photo
+                    Profile
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Name
@@ -152,53 +167,44 @@ const UserManagement = () => {
                       {candidate.phone}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(candidate.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
+                      {new Date(candidate.createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
                       })}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
-                      <div className="flex justify-center space-x-2">
-                       
-                        <button 
-                          onClick={() => deleteCandidate(candidate._id)}
-                          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-[#EF4444] hover:bg-[#DC2626] focus:outline-none"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m4-6v.01M5 7V4a1 1 0 011-1h12a1 1 0 011 1v3" />
-                          </svg>
-                          Delete
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => deleteCandidate(candidate._id)}
+                        className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          
-          <div className="px-6 py-4 border-t border-gray-200">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500">
-                Showing page {currentPage} of {totalPages}
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Previous
-                </button>
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Next
-                </button>
-              </div>
+          <div className="px-6 py-4 border-t border-gray-200 flex justify-between items-center">
+            <span className="text-sm text-gray-500">
+              Showing page {currentPage} of {totalPages}
+            </span>
+            <div className="flex space-x-2">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+              >
+                Next
+              </button>
             </div>
           </div>
         </div>
@@ -212,4 +218,3 @@ const UserManagement = () => {
 };
 
 export default UserManagement;
-

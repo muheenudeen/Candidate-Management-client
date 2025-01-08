@@ -59,7 +59,7 @@ export default function LoginForm() {
             onClick={toggleRole}
             className={`inline-flex items-center px-4 py-2 rounded-full ${bgColor} ${hoverColor} text-white`}
           >
-            {isAdmin ? 'Switch to Candidate' : 'Switch to Admin'}
+            {isAdmin ? 'Admin' : 'Candidate'}
           </button>
         </div>
 

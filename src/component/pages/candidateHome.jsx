@@ -92,11 +92,23 @@ export default function CandidateHome() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    navigate('/candidate/login');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg shadow-2xl rounded-3xl overflow-hidden">
           <div className="p-8">
+          <button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Logout
+        </button>
             <div className="flex justify-between items-center mb-8">
               <img
                 src="https://images.jdmagicbox.com/v2/comp/bhubaneshwar/v6/0674px674.x674.220603004828.p2v6/catalogue/a-r-robotics-bhubaneswar-bhubaneshwar-research-centres-aj5j7yyhzm.jpg"
